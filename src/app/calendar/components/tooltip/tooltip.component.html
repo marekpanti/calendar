@@ -1,0 +1,22 @@
+<div
+  class="tooltip"
+  [id]="id"
+  [ngClass]="['tooltip--' + position, 'tooltip--' + theme]"
+  [class.tooltip--visible]="visible"
+  [style.left]="left + 'px'"
+  [style.top]="top + 'px'"
+  (mouseleave)="detectMouseOut()"
+>
+  <h3>{{ tooltip[0].start | date: 'dd.MM.yyyy' }}</h3>
+  <div class="items">
+    <span
+      *ngFor="let occurence of tooltip"
+      class="item"
+      [style.background]="occurence.color?.primary + '20'"
+      [style.borderColor]="occurence.color?.primary"
+      >{{ occurence?.title }}, {{ occurence.start | date: 'hh:mm' }} -
+      {{ occurence.end | date: 'hh:mm' }}, {{ occurence.meta.attendance }} /
+      {{ occurence.meta.capacity }}</span
+    >
+  </div>
+</div>

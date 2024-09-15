@@ -1,1 +1,61 @@
 /* You can add global styles to this file, and also import other style files */
+
+body {
+  background: #f5f7f4;
+  font-family: 'Poppins';
+  --background: #f5f7f4;
+  --headline: #2f472e;
+  --element-background: #fff;
+  --body-color: #505050;
+  --element-background-hover: $slate-light;
+  --navigation-text-color: #ebefe9;
+  --navigation-active-color: #5e635d;
+  --nav-from-gradient: #d4fcef;
+  --nav-to-gradient: #7eedde;
+  --calendar-bg-color: #ebefe9;
+  --calendar-day-label-bg: #cbd0c8;
+  --basic-black-color: #2a2a2a;
+  --today-border-color: #c9c9c9;
+  --days-in-month-view-color: #c9c9c9;
+  --red: #BF2A21;
+
+  --spring: #2bbfc4;
+  --spring-light: #7eedde;
+  --spring-dark: #083e5e;
+
+  --slate: #505050;
+  --slate-light: #d1d1d1;
+  --slate-dark: #2a2a2a;
+
+  --papaya: #fdf0d5;
+  --papaya-light: rgba(#fdf0d5, 0.3);
+
+  --accent: #6592fd;
+  --accent-dark: #4f72c4;
+
+  --grey: #8f9295;
+  --grey-lighter: #e9eaea;
+
+  --headline: var(--headline);
+
+  --background: var(--background);
+
+  // Font sizes
+  --medium: 1rem;
+  --large: 2rem;
+  --medium-small: 0.8rem;
+  --small: 0.5rem;
+  --medium-large: 1.2rem;
+  --specific: 0.75rem;
+
+  // borders
+  --header-border: 0 5px 0 0;
+
+  // spacings
+  --s-medium: 1rem;
+  --s-small: 0.5rem;
+
+  // constants
+  --min-height: 650px;
+  --max-width: 320px;
+}

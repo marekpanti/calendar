@@ -1,0 +1,245 @@
+<div class="calendar">
+  <div *ngIf="!timePicker" class="day-picker">
+    <div class="month">
+      <span class="cal-icon" (click)="prev()"
+        ><div class="arrow-left">
+          <svg
+            width="100%"
+            height="100%"
+            viewBox="0 0 7 5"
+            version="1.1"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            xml:space="preserve"
+            xmlns:serif="http://www.serif.com/"
+            style="
+              fill-rule: evenodd;
+              clip-rule: evenodd;
+              stroke-linejoin: round;
+              stroke-miterlimit: 2;
+            "
+          >
+            <g transform="matrix(1,0,0,1,-706,-357)">
+              <g
+                transform="matrix(-3.16031e-17,-0.172039,0.172039,-3.16031e-17,705.312,363.905)"
+              >
+                <path
+                  d="M32.75,44L12.75,24L32.75,4L35.55,6.85L18.4,24L35.55,41.15L32.75,44Z"
+                  style="fill-rule: nonzero"
+                />
+              </g>
+            </g>
+          </svg></div
+      ></span>
+      <div class="date">
+        <span class="calendar-title"
+          ><span
+            #first
+            appList
+            [elementt]="first"
+            [listData]="months"
+            [selected]="date.getMonth()"
+            (selectMonth)="setMonth($event)"
+            >{{ months[date.getMonth()] }}
+            <div class="arrow-down">
+              <svg
+                width="100%"
+                height="100%"
+                viewBox="0 0 7 5"
+                version="1.1"
+                xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+                xml:space="preserve"
+                xmlns:serif="http://www.serif.com/"
+                style="
+                  fill-rule: evenodd;
+                  clip-rule: evenodd;
+                  stroke-linejoin: round;
+                  stroke-miterlimit: 2;
+                "
+              >
+                <g transform="matrix(1,0,0,1,-706,-357)">
+                  <g
+                    transform="matrix(-3.16031e-17,-0.172039,0.172039,-3.16031e-17,705.312,363.905)"
+                  >
+                    <path
+                      d="M32.75,44L12.75,24L32.75,4L35.55,6.85L18.4,24L35.55,41.15L32.75,44Z"
+                      style="fill-rule: nonzero"
+                    />
+                  </g>
+                </g>
+              </svg>
+            </div>
+          </span>
+          <span
+            #second
+            appList
+            [elementt]="second"
+            [listData]="getYearRange()"
+            [selected]="15"
+            (selectYear)="setYear($event)"
+            >{{ date.getFullYear() }}
+            <div class="arrow-down">
+              <svg
+                width="100%"
+                height="100%"
+                viewBox="0 0 7 5"
+                version="1.1"
+                xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+                xml:space="preserve"
+                xmlns:serif="http://www.serif.com/"
+                style="
+                  fill-rule: evenodd;
+                  clip-rule: evenodd;
+                  stroke-linejoin: round;
+                  stroke-miterlimit: 2;
+                "
+              >
+                <g transform="matrix(1,0,0,1,-706,-357)">
+                  <g
+                    transform="matrix(-3.16031e-17,-0.172039,0.172039,-3.16031e-17,705.312,363.905)"
+                  >
+                    <path
+                      d="M32.75,44L12.75,24L32.75,4L35.55,6.85L18.4,24L35.55,41.15L32.75,44Z"
+                      style="fill-rule: nonzero"
+                    />
+                  </g>
+                </g>
+              </svg>
+            </div>
+          </span>
+        </span>
+      </div>
+      <span class="cal-icon" (click)="next()"
+        ><div class="arrow-right">
+          <svg
+            width="100%"
+            height="100%"
+            viewBox="0 0 7 5"
+            version="1.1"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            xml:space="preserve"
+            xmlns:serif="http://www.serif.com/"
+            style="
+              fill-rule: evenodd;
+              clip-rule: evenodd;
+              stroke-linejoin: round;
+              stroke-miterlimit: 2;
+            "
+          >
+            <g transform="matrix(1,0,0,1,-706,-357)">
+              <g
+                transform="matrix(-3.16031e-17,-0.172039,0.172039,-3.16031e-17,705.312,363.905)"
+              >
+                <path
+                  d="M32.75,44L12.75,24L32.75,4L35.55,6.85L18.4,24L35.55,41.15L32.75,44Z"
+                  style="fill-rule: nonzero"
+                />
+              </g>
+            </g>
+          </svg></div
+      ></span>
+    </div>
+    <div class="weekdays">
+      <div>{{ days[0] }}</div>
+      <div>{{ days[1] }}</div>
+      <div>{{ days[2] }}</div>
+      <div>{{ days[3] }}</div>
+      <div>{{ days[4] }}</div>
+      <div>{{ days[5] }}</div>
+      <div>{{ days[6] }}</div>
+    </div>
+    <div class="days">
+      <div class="prev-date" *ngFor="let day of prevDays; let i = index">
+        {{ day }}
+      </div>
+
+      <div
+        *ngFor="let day of currentDaysArray; let i = index"
+        [ngClass]="{
+          today:
+            currentDay.getDate() === i + 1 &&
+            date.getMonth() === currentDay.getMonth() &&
+            date.getFullYear() === currentDay.getFullYear(),
+          selected:
+            (clickedDate &&
+              clickedDate.getDate() === i + 1 &&
+              clickedDate.getMonth() === date.getMonth() &&
+              clickedDate.getFullYear() === date.getFullYear()) ||
+            (clickedToDate &&
+              clickedToDate.getDate() === i + 1 &&
+              clickedToDate.getMonth() === date.getMonth() &&
+              clickedToDate.getFullYear() === date.getFullYear()),
+          inSelection: inRangeSelection(day.day)
+        }"
+        [tabIndex]="1"
+        (click)="setDate(day.day)"
+      >
+        {{ day.day }}
+        <span
+          *ngIf="day.total.hours > 0 || day.total.minutes > 0"
+          class="total-hours"
+          >{{ day?.total?.hours }}:{{ day?.total?.minutes }}</span
+        >
+      </div>
+
+      <div class="next-date" *ngFor="let day of lastDays; let i = index">
+        {{ day }}
+      </div>
+    </div>
+  </div>
+  <!-- <div class="time">
+    <form *ngIf="!range" [formGroup]="timeForm">
+      <div class="number">
+        <input
+          [value]="timeForm.get('hours')?.value | number : '2.0'"
+          type="number"
+          [class.error]="!timeForm.get('hours')?.valid"
+          formControlName="hours"
+        />
+        <div class="number__actions">
+          <span
+            class="number__actions__item"
+            (click)="increase(timeTypes.HOURS)"
+            >+</span
+          >
+          <span
+            class="number__actions__item"
+            (click)="decrease(timeTypes.HOURS)"
+            >-</span
+          >
+        </div>
+      </div>
+      <span class="time-span">:</span>
+      <div class="number">
+        <input
+          [value]="timeForm.get('minutes')?.value | number : '2.0'"
+          [class.error]="!timeForm.get('minutes')?.valid"
+          type="number"
+          formControlName="minutes"
+        />
+        <div class="number__actions">
+          <span
+            class="number__actions__item"
+            (click)="increase(timeTypes.MINUTES)"
+            >+</span
+          >
+          <span
+            class="number__actions__item"
+            (click)="decrease(timeTypes.MINUTES)"
+            >-</span
+          >
+        </div>
+      </div>
+    </form>
+    <button
+      class="confirm"
+      [disabled]="disableConfirmButton()"
+      (click)="confirm()"
+    >
+      OK
+    </button>
+  </div> -->
+</div>

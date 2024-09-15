@@ -1,0 +1,22 @@
+<div class="events-right time">
+  @for (event of dailyEvents; track event) {
+  <div
+    class="event-hour"
+    [style.top.px]="event.y"
+    [style.left.%]="event.x"
+    [style.width.%]="event.width"
+    [style.height.px]="event.height"
+    [style.background]="event.color.primary + '22'"
+    [style.borderColor]="event.color.primary"
+  >
+    <span>{{ event.title }}</span>
+  </div>
+  }
+  <div class="right">
+    @for (hour of [].constructor(24); track $index) {
+    <div class="time-item">
+      <div class="time-line"></div>
+    </div>
+    }
+  </div>
+</div>

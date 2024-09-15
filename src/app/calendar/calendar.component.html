@@ -1,0 +1,20 @@
+<div class="calendar-wrapper">
+  <div class="upper-line">
+    <div class="buttons">
+      <span
+        matRipple
+        id="active-background"
+        [style.left.px]="view === VIEWS.WEEK ? 0 : 144"
+      ></span>
+      <span class="button" (click)="view = VIEWS.WEEK">Tyzden</span>
+      <span class="button" (click)="view = VIEWS.SMART">Smart</span>
+    </div>
+  </div>
+  <div class="calendar-body">
+    @if (view === VIEWS.SMART) {
+    <app-smart></app-smart>
+    } @else {
+    <app-week></app-week>
+    }
+  </div>
+</div>

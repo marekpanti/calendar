@@ -1,0 +1,105 @@
+<div class="container">
+  <div class="calendar">
+    <div class="month">
+      <div class="cal-nav">
+        <span class="cal-icon" (click)="prev()">
+          <span class="material-symbols-outlined"> arrow_back_ios_new </span>
+        </span>
+        <div class="date">
+          <p>
+            {{ months[date.getMonth()] }} {{ clickedDate.getDate() }},
+            {{ date.getFullYear() }}
+          </p>
+        </div>
+        <span class="cal-icon" (click)="next()">
+          <span class="material-symbols-outlined">
+            arrow_forward_ios
+          </span></span
+        >
+        <span class="cal-icon">
+          <span
+            class="material-symbols-outlined"
+            dateTimePicker
+            (selectDate)="selectDate($event)"
+            >calendar_month</span
+          ></span
+        >
+      </div>
+      @if (innerWidth < 820) {
+      <button class="toggle" (click)="toggleCalendarView()">
+        <span class="material-symbols-outlined">
+          {{
+            calendarViewExpanded()
+              ? "keyboard_double_arrow_up"
+              : "keyboard_double_arrow_down"
+          }}
+        </span>
+      </button>
+      }
+    </div>
+    @if (calendarViewExpanded()) {
+    <div @myInsertRemoveTrigger class="weekdays">
+      <div [class.todayHead]="currentDay.getDay() === 1">Po</div>
+      <div [class.todayHead]="currentDay.getDay() === 2">Ut</div>
+      <div [class.todayHead]="currentDay.getDay() === 3">St</div>
+      <div [class.todayHead]="currentDay.getDay() === 4">Št</div>
+      <div [class.todayHead]="currentDay.getDay() === 5">Pia</div>
+      <div [class.todayHead]="currentDay.getDay() === 6">So</div>
+      <div [class.todayHead]="currentDay.getDay() === 0">Ne</div>
+    </div>
+    <div class="days" @myInsertRemoveTrigger>
+      <div class="prev-date" *ngFor="let day of prevDays; let i = index">
+        {{ day }}
+      </div>
+
+      <div
+        *ngFor="let day of currentDaysArray; let i = index"
+        (click)="selectDay(i)"
+      >
+        <span
+          [ngClass]="{
+            today:
+              currentDay.getDate() === i + 1 &&
+              date.getMonth() === currentDay.getMonth() &&
+              date.getFullYear() === currentDay.getFullYear(),
+            selected:
+              clickedDate.getDate() === i + 1 &&
+              clickedDate.getMonth() === date.getMonth() &&
+              clickedDate.getFullYear() === date.getFullYear()
+          }"
+          >{{ day.day }}</span
+        >
+        <div *ngIf="convertedEvents[day.day]" class="events">
+          <span
+            class="event"
+            seiriTooltip="'Meow on the LEFT!'"
+            [tooltip]="convertedEvents[day.day]"
+            [id]="day.day"
+            >{{ convertedEvents[day.day].length }}</span
+          >
+        </div>
+      </div>
+
+      <div class="next-date" *ngFor="let day of lastDays; let i = index">
+        {{ day }}
+      </div>
+    </div>
+    }
+  </div>
+  <div class="detail" @myInsertRemoveTrigger>
+    <div class="day-view time">
+      <div class="current-hour-line" [style.top.px]="counter()?.hourOffset">
+        <div class="time">{{ counter()?.time | date : "HH:mm" }}</div>
+        <div class="line"></div>
+      </div>
+      <div class="left">
+        @for (time of [].constructor(24); track $index) {
+        <div class="time-item">
+          <div class="time-hour">{{ $index }}:00</div>
+        </div>
+        }
+      </div>
+      <app-day class="right" [dailyEvents]="viewEvents"></app-day>
+    </div>
+  </div>
+</div>

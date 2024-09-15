@@ -1,0 +1,128 @@
+.tooltip {
+  position: absolute;
+  background-color: red;
+  height: 150px;
+  width: 200px;
+  border-radius: 5px;
+  color: #ffffff;
+  font-family: Arial;
+  padding: 3px 6px;
+  font-size: 13px;
+  opacity: 0;
+  z-index: 9999999;
+  overflow-x: auto;
+  box-shadow: 4px 4px 24px -1px rgba(0, 0, 0, 0.07);
+
+  h3 {
+    font-size: 0.85rem;
+    text-align: left;
+    margin: 0;
+    color: var(--navigation-active-color);
+    font-size: 500;
+    margin: 0.5rem 0;
+  }
+
+  .items {
+    span {
+      display: flex;
+      background: #f7f7f7;
+      padding: 0.5rem;
+      border-radius: 5px;
+      margin-bottom: 0.2rem;
+      border: 1px solid #afafaf;
+    }
+  }
+
+  &::before {
+    content: '';
+    width: 0;
+    height: 0;
+    position: absolute;
+  }
+
+  &--visible {
+    opacity: 1;
+    transition: opacity 300ms;
+  }
+
+  &--light {
+    background-color: #fff;
+    color: black;
+
+    &::before {
+      border: 5px solid #d4d4d4;
+    }
+  }
+
+  &--below {
+    transform: translateX(-50%);
+    margin-top: 7px;
+
+    &::before {
+      border-left-color: transparent;
+      border-right-color: transparent;
+      border-top: none;
+      left: calc(50% - 5px);
+      top: -5px;
+    }
+  }
+
+  &--above {
+    transform: translate(-50%, -100%);
+    margin-bottom: 7px;
+
+    &::before {
+      border-left-color: transparent;
+      border-right-color: transparent;
+      border-bottom: none;
+      left: calc(50% - 5px);
+      bottom: -5px;
+    }
+  }
+
+  &--left {
+    transform: translate(calc(-100% - 7px), -50%);
+
+    &::before {
+      border-top-color: transparent;
+      border-bottom-color: transparent;
+      border-right: none;
+      right: -5px;
+      top: calc(50% - 5px);
+    }
+  }
+
+  &--right {
+    transform: translateY(-50%);
+    margin-left: 7px;
+
+    &::before {
+      border-top-color: transparent;
+      border-bottom-color: transparent;
+      border-left: none;
+      left: -5px;
+      top: calc(50% - 5px);
+    }
+  }
+
+  &--dynamic {
+    margin-left: 20px;
+
+    &::before {
+      display: none;
+    }
+  }
+}
+
+.tooltip::-webkit-scrollbar {
+  background: var(--element-background-hover);
+  width: 4px;
+  height: 4px;
+  transition: scrollbar-color 0.3s ease-out;
+}
+
+.tooltip::-webkit-scrollbar-thumb {
+  background: var(--slate);
+  width: 4px;
+  height: 4px;
+}

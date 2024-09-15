@@ -1,0 +1,51 @@
+<div class="container" @myInsertRemoveTrigger>
+  <div class="date">
+    <h3>{{ week[0] | date }} - {{ week[6] | date }}</h3>
+  </div>
+  <div class="header">
+    <span class="cal-icon" (click)="changeSelected(-7)">
+      <span class="material-symbols-outlined"> arrow_back_ios_new </span>
+    </span>
+    <div class="day-title">
+      @for(day of week; track day) {
+      <div
+        class="time"
+        [ngClass]="{
+          today:
+            today.getDate() === day.getDate() &&
+            selectedDate.getMonth() === today.getMonth() &&
+            selectedDate.getFullYear() === today.getFullYear()
+        }"
+      >
+        <span class="day">{{ days[$index] }}</span>
+        <span class="date">{{ day | date : "d.M" }}</span>
+      </div>
+      }
+    </div>
+    <span class="cal-icon" (click)="changeSelected(7)">
+      <span class="material-symbols-outlined">arrow_forward_ios</span>
+    </span>
+  </div>
+  <div class="calendar">
+    @if(counter()?.time) {
+    <div class="current-hour-line" [style.top.px]="counter()?.hourOffset">
+      <div class="time">{{ counter()?.time | date : "HH:mm" }}</div>
+      <div class="line"></div>
+    </div>
+    }
+    <div class="left">
+      @for (time of [].constructor(24); track $index;) {
+      <div class="time-item">
+        <div class="time-hour">{{ $index }}:00</div>
+      </div>
+      }
+    </div>
+    <div class="right">
+      @for(day of week; track day) { @let id = day.getDate();
+      <div class="day-column">
+        <app-day [dailyEvents]="convertedEvents[id]"></app-day>
+      </div>
+      }
+    </div>
+  </div>
+</div>
