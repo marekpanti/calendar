@@ -134,17 +134,13 @@ export class CalendarService {
   }
 
   getDaysInPeriod(date: Date): Date[] {
-    console.log(date);
     const daysInPeriod = [];
     const currentDate = new Date(this.getMondayOfWeek(date));
-    console.log(currentDate.getTime())
     const lastDay = new Date(currentDate.getTime() + DAY_IN_MILLISECONDS * 6);
-    console.log(currentDate, lastDay);
     while (currentDate <= lastDay) {
       daysInPeriod.push(new Date(currentDate));
       currentDate.setDate(currentDate.getDate() + 1);
     }
-    console.log(daysInPeriod);
     return daysInPeriod;
   }
 

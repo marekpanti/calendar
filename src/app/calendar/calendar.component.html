@@ -12,9 +12,9 @@
   </div>
   <div class="calendar-body">
     @if (view === VIEWS.SMART) {
-    <app-smart></app-smart>
+    <app-smart [selectedDate]="selectedDay" (onChangeDate)="selectDate($event)"></app-smart>
     } @else {
-    <app-week></app-week>
+    <app-week [selectedDate]="selectedDay" (onChangeDate)="selectDate($event)"></app-week>
     }
   </div>
 </div>

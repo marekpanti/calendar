@@ -7,8 +7,8 @@
         </span>
         <div class="date">
           <p>
-            {{ months[date.getMonth()] }} {{ clickedDate.getDate() }},
-            {{ date.getFullYear() }}
+            {{ months[clickedDate.getMonth()] }} {{ clickedDate.getDate() }},
+            {{ clickedDate.getFullYear() }}
           </p>
         </div>
         <span class="cal-icon" (click)="next()">

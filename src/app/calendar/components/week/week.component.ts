@@ -1,4 +1,10 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} from '@angular/core';
 import { CalendarService } from '../../calendar-service.service';
 import { CommonModule, DatePipe, JsonPipe } from '@angular/common';
 import { DayComponent } from '../day/day.component';
@@ -24,10 +30,11 @@ import { eventsDemo } from '../../../events';
 })
 export class WeekComponent {
   @Input() events: any = [];
+  @Input() selectedDate = new Date();
+  @Output() onChangeDate: EventEmitter<Date> = new EventEmitter();
   private counter$ = this.calendarService.updateTimeEverySecond();
 
   today = new Date();
-  selectedDate = new Date();
   days = ['Po', 'Ut', 'St', 'Št', 'Pia', 'So', 'Ne'];
   week = this.calendarService.getDaysInPeriod(this.selectedDate);
   counter = toSignal(this.counter$);
@@ -79,25 +86,22 @@ export class WeekComponent {
     });
 
     this.convertedEvents = this.convertedEvents.map((events: any) => {
-      console.log(this.calendarService.calcSize(
-        events,
-        this.ROW_HEIGHT_PX
-      ))
-      return this.calendarService.calcSize(
-        events,
-        this.ROW_HEIGHT_PX
-      );
-    })
-    console.log(this.convertedEvents);
+      return this.calendarService.calcSize(events, this.ROW_HEIGHT_PX);
+    });
   }
 
   ngOnInit() {
     this.tempMethod();
+    console.log(this.selectedDate);
+  }
+
+  ngOnChanges() {
+    this.week = this.calendarService.getDaysInPeriod(this.selectedDate);
   }
 
   changeSelected(n: number) {
     this.selectedDate.setDate(this.selectedDate.getDate() + n);
     this.week = this.calendarService.getDaysInPeriod(this.selectedDate);
-    console.log('tu');
+    this.onChangeDate.emit(this.selectedDate)
   }
 }

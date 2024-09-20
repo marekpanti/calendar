@@ -43,6 +43,7 @@
   }
 
   .event-hour {
+    box-sizing: border-box;
     position: absolute;
     top: calc(250px + 0.5rem + 8px);
     width: 90%;

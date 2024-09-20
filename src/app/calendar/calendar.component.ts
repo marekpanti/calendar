@@ -14,4 +14,12 @@ import { WeekComponent } from "./components/week/week.component";
 export class CalendarComponent {
   VIEWS = VIEWS;
   view: VIEWS = VIEWS.WEEK;
+
+  selectedDay = new Date();
+
+  selectDate($event: Date) {
+    console.log($event);
+    this.selectedDay = new Date($event);
+    console.log(this.selectedDay)
+  }
 }

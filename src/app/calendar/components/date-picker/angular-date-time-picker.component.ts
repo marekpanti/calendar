@@ -146,7 +146,6 @@ export class AngularDateTimePickerComponent {
     for (let j = 1; j <= this.nextDays; j++) {
       this.lastDays.push(j);
     }
-    console.log(this.currentDaysArray);
   }
 
   close() {
