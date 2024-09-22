@@ -18,8 +18,6 @@ export class CalendarComponent {
   selectedDay = new Date();
 
   selectDate($event: Date) {
-    console.log($event);
     this.selectedDay = new Date($event);
-    console.log(this.selectedDay)
   }
 }

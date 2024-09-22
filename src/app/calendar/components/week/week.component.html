@@ -1,9 +1,9 @@
 <div class="container" @myInsertRemoveTrigger>
   <div class="date">
-    <h3>{{ week[0] | date }} - {{ week[6] | date }}</h3>
+    <h3>{{ week[0] | date }} - {{ week[week.length - 1] | date }}</h3>
   </div>
   <div class="header">
-    <span class="cal-icon" (click)="changeSelected(-7)">
+    <span class="cal-icon" (click)="changeSelected(-1)">
       <span class="material-symbols-outlined"> arrow_back_ios_new </span>
     </span>
     <div class="day-title">
@@ -17,12 +17,12 @@
             selectedDate.getFullYear() === today.getFullYear()
         }"
       >
-        <span class="day">{{ days[$index] }}</span>
+        <span class="day">{{ day.getDay() === 0 ? days[6] : days[day.getDay() - 1] }}</span>
         <span class="date">{{ day | date : "d.M" }}</span>
       </div>
       }
     </div>
-    <span class="cal-icon" (click)="changeSelected(7)">
+    <span class="cal-icon" (click)="changeSelected(1)">
       <span class="material-symbols-outlined">arrow_forward_ios</span>
     </span>
   </div>

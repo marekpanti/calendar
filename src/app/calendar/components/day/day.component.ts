@@ -10,8 +10,4 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 })
 export class DayComponent {
   @Input() dailyEvents: any[] = []; // TODO type
-
-  ngOnInit() {
-    console.log(this.dailyEvents);
-  }
 }

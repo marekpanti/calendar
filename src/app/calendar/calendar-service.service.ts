@@ -133,14 +133,21 @@ export class CalendarService {
     );
   }
 
-  getDaysInPeriod(date: Date): Date[] {
+  getDaysInPeriod(date: Date, isResponsive: boolean, isChanged: boolean): Date[] {
     const daysInPeriod = [];
-    const currentDate = new Date(this.getMondayOfWeek(date));
-    const lastDay = new Date(currentDate.getTime() + DAY_IN_MILLISECONDS * 6);
+    let currentDate = new Date(this.getMondayOfWeek(date));
+    let lastDay = new Date(currentDate.getTime() + DAY_IN_MILLISECONDS * 6);
+    if (isResponsive && isChanged) {
+      currentDate = new Date(date);
+    }
+    if (isResponsive) {
+      lastDay = new Date(currentDate.getTime() + DAY_IN_MILLISECONDS * 2);
+    }
     while (currentDate <= lastDay) {
       daysInPeriod.push(new Date(currentDate));
       currentDate.setDate(currentDate.getDate() + 1);
     }
+    console.log(daysInPeriod)
     return daysInPeriod;
   }
 

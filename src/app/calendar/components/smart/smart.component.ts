@@ -53,7 +53,6 @@ import { TooltipService } from '../tooltip/tooltip.service';
 export class SmartComponent implements OnInit {
   @Input() events: any[] = []; // TODO type
   @Input() set selectedDate(date: Date) {
-    console.log('inside setter', date)
     this.date = new Date(new Date(date).setDate(1))
     this.selectDay(date.getDate() - 1);
   };
@@ -177,7 +176,6 @@ export class SmartComponent implements OnInit {
   }
 
   selectDate(e: any) {
-    console.log(e);
     this.clickedDate = e;
     this.date = new Date(new Date(e).setDate(1))
     this.selectDay(e.getDate() - 1)
@@ -303,7 +301,6 @@ export class SmartComponent implements OnInit {
       currentMonth,
       selectedDayIndex + 1
     );
-    console.log(this.clickedDate);
     this.currentClickedIndex = selectedDayIndex;
     this.viewEvents = this.calendarService.calcSize(
       this.convertedEvents[selectedDayIndex + 1],

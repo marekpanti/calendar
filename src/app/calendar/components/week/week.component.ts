@@ -2,7 +2,9 @@ import {
   ChangeDetectionStrategy,
   Component,
   EventEmitter,
+  HostListener,
   Input,
+  OnInit,
   Output,
 } from '@angular/core';
 import { CalendarService } from '../../calendar-service.service';
@@ -28,7 +30,7 @@ import { eventsDemo } from '../../../events';
     ]),
   ],
 })
-export class WeekComponent {
+export class WeekComponent implements OnInit {
   @Input() events: any = [];
   @Input() selectedDate = new Date();
   @Output() onChangeDate: EventEmitter<Date> = new EventEmitter();
@@ -36,12 +38,31 @@ export class WeekComponent {
 
   today = new Date();
   days = ['Po', 'Ut', 'St', 'Št', 'Pia', 'So', 'Ne'];
-  week = this.calendarService.getDaysInPeriod(this.selectedDate);
+  week = this.calendarService.getDaysInPeriod(this.selectedDate, false, false);
   counter = toSignal(this.counter$);
   convertedEvents: any = [];
   ROW_HEIGHT_PX = 50;
+  isResponsive = false;
+
+  @HostListener('window:resize', ['$event'])
+  onWindowResize() {
+    if (window.innerWidth < 900) {
+      this.isResponsive = true;
+      this.week = this.calendarService.getDaysInPeriod(this.selectedDate, this.isResponsive, true);
+    } else {
+      this.isResponsive = false;
+    }
+  }
 
   constructor(public calendarService: CalendarService) {}
+
+  ngOnInit() {
+    if (window.innerWidth < 900) {
+      this.tempMethod();
+      this.isResponsive = true;
+      this.week = this.calendarService.getDaysInPeriod(this.selectedDate, this.isResponsive, true);
+    }
+  }
 
   tempMethod() {
     this.events = eventsDemo.results.map((item) => {
@@ -90,18 +111,18 @@ export class WeekComponent {
     });
   }
 
-  ngOnInit() {
-    this.tempMethod();
-    console.log(this.selectedDate);
-  }
-
-  ngOnChanges() {
-    this.week = this.calendarService.getDaysInPeriod(this.selectedDate);
-  }
+  // ngOnChanges() {
+  //   this.week = this.calendarService.getDaysInPeriod(this.selectedDate, this.isResponsive, false);
+  // }
 
   changeSelected(n: number) {
-    this.selectedDate.setDate(this.selectedDate.getDate() + n);
-    this.week = this.calendarService.getDaysInPeriod(this.selectedDate);
+    let number = 7
+    if (this.isResponsive) {
+      number = 3
+    }
+    this.selectedDate.setDate(this.selectedDate.getDate() + (number * n));
+    console.log(this.selectedDate);
+    this.week = this.calendarService.getDaysInPeriod(this.selectedDate, this.isResponsive, true);
     this.onChangeDate.emit(this.selectedDate)
   }
 }
