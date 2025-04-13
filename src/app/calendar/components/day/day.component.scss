@@ -43,6 +43,7 @@
   }
 
   .event-hour {
+    box-sizing: border-box;
     position: absolute;
     top: calc(250px + 0.5rem + 8px);
     width: 90%;
@@ -51,6 +52,9 @@
     border: 1px #2a2a2a solid;
     border-radius: 5px;
     left: 10%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
   }
 
   .time-item {

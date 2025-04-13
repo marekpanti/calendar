@@ -7,8 +7,8 @@
         </span>
         <div class="date">
           <p>
-            {{ months[date.getMonth()] }} {{ clickedDate.getDate() }},
-            {{ date.getFullYear() }}
+            {{ months[clickedDate.getMonth()] }} {{ clickedDate.getDate() }},
+            {{ clickedDate.getFullYear() }}
           </p>
         </div>
         <span class="cal-icon" (click)="next()">
@@ -26,7 +26,7 @@
         >
       </div>
       @if (innerWidth < 820) {
-      <button class="toggle" (click)="toggleCalendarView()">
+      <span class="toggle cal-icon" (click)="toggleCalendarView()">
         <span class="material-symbols-outlined">
           {{
             calendarViewExpanded()
@@ -34,7 +34,7 @@
               : "keyboard_double_arrow_down"
           }}
         </span>
-      </button>
+      </span>
       }
     </div>
     @if (calendarViewExpanded()) {

@@ -14,7 +14,7 @@ export class TooltipDirective implements OnDestroy {
 
   constructor(private elementRef: ElementRef, private tooltipService: TooltipService) {}
 
-  @HostListener('mouseenter', ['$event'])
+  @HostListener('click', ['$event'])
   onMouseEnter(event: any): void {
     this.initializeTooltip()
   }

@@ -6,15 +6,15 @@
         id="active-background"
         [style.left.px]="view === VIEWS.WEEK ? 0 : 144"
       ></span>
-      <span class="button" (click)="view = VIEWS.WEEK">Tyzden</span>
+      <span class="button" (click)="view = VIEWS.WEEK">Week</span>
       <span class="button" (click)="view = VIEWS.SMART">Smart</span>
     </div>
   </div>
   <div class="calendar-body">
     @if (view === VIEWS.SMART) {
-    <app-smart></app-smart>
+    <app-smart [selectedDate]="selectedDay" (onChangeDate)="selectDate($event)"></app-smart>
     } @else {
-    <app-week></app-week>
+    <app-week [selectedDate]="selectedDay" [events]="events" (onChangeDate)="selectDate($event)"></app-week>
     }
   </div>
 </div>

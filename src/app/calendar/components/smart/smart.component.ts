@@ -52,7 +52,11 @@ import { TooltipService } from '../tooltip/tooltip.service';
 })
 export class SmartComponent implements OnInit {
   @Input() events: any[] = []; // TODO type
-  @Output() changeMonth: EventEmitter<Date> = new EventEmitter();
+  @Input() set selectedDate(date: Date) {
+    this.date = new Date(new Date(date).setDate(1))
+    this.selectDay(date.getDate() - 1);
+  };
+  @Output() onChangeDate: EventEmitter<Date> = new EventEmitter();
 
   calendarViewExpanded = signal(true);
   calendarDayExpanded = true;
@@ -152,7 +156,6 @@ export class SmartComponent implements OnInit {
     this.calcDays();
     // this.calendarViewExpanded.set(true);
     this.calendarDayExpanded = true;
-    this.selectDay(new Date().getDate() - 1);
 
     if (this.events.length > 0) {
       this.convertedEvents = {};
@@ -170,10 +173,11 @@ export class SmartComponent implements OnInit {
         }
       });
     }
-    console.log(this.convertedEvents)
   }
 
   selectDate(e: any) {
+    this.clickedDate = e;
+    this.date = new Date(new Date(e).setDate(1))
     this.selectDay(e.getDate() - 1)
   }
 
@@ -198,7 +202,6 @@ export class SmartComponent implements OnInit {
   // }
 
   toggleCalendarView() {
-    console.log('tu');
     this.calendarDayExpanded = true;
     this.calendarViewExpanded.set(!this.calendarViewExpanded());
   }
@@ -298,12 +301,12 @@ export class SmartComponent implements OnInit {
       currentMonth,
       selectedDayIndex + 1
     );
-    console.log(this.clickedDate);
     this.currentClickedIndex = selectedDayIndex;
     this.viewEvents = this.calendarService.calcSize(
       this.convertedEvents[selectedDayIndex + 1],
       this.ROW_HEIGHT_PX
     );
+    this.onChangeDate.emit(this.clickedDate);
   }
 
   close() {
@@ -315,17 +318,12 @@ export class SmartComponent implements OnInit {
   prev() {
     this.date.setMonth(this.date.getMonth() - 1);
     this.calcDays();
-    this.changeMonth.emit(this.date);
-  }
-
-  emitDate() {
-    this.clickedDate = this.date;
-    this.changeMonth.emit(this.date);
+    this.onChangeDate.emit(this.date);
   }
 
   next() {
     this.date.setMonth(this.date.getMonth() + 1);
     this.calcDays();
-    this.changeMonth.emit(this.date);
+    this.onChangeDate.emit(this.date);
   }
 }
