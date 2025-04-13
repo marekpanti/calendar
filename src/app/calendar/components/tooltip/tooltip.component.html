@@ -8,6 +8,9 @@
   (mouseleave)="detectMouseOut()"
 >
   <h3>{{ tooltip[0].start | date: 'dd.MM.yyyy' }}</h3>
+  <span class="material-symbols-outlined">
+    close
+    </span>
   <div class="items">
     <span
       *ngFor="let occurence of tooltip"

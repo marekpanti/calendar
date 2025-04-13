@@ -147,7 +147,6 @@ export class CalendarService {
       daysInPeriod.push(new Date(currentDate));
       currentDate.setDate(currentDate.getDate() + 1);
     }
-    console.log(daysInPeriod)
     return daysInPeriod;
   }
 

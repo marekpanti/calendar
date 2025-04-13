@@ -12,4 +12,8 @@ import { CalendarComponent } from './calendar/calendar.component';
 })
 export class AppComponent {
   title = 'calendar';
+
+  addEvent() {
+    console.log('add')
+  }
 }
