@@ -10,13 +10,10 @@ import {
 } from '@angular/core';
 import {
   ConvertedCalendarEvent,
-  GenericEvent,
 } from '../../interfaces/calendar.model';
 import { CalendarService } from '../../calendar-service.service';
 import { CommonModule, DatePipe, JsonPipe } from '@angular/common';
 import { DayComponent } from '../day/day.component';
-import { AngularDateTimePickerComponent } from '../date-picker/angular-date-time-picker.component';
-import { AngularDateTimePickerDirective } from '../date-picker/angular-date-time-picker.directive';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { animate, style, transition, trigger } from '@angular/animations';
 import { eventsDemo } from '../../../events';
@@ -33,8 +30,6 @@ import { TooltipService } from '../tooltip/tooltip.service';
     JsonPipe,
     DatePipe,
     DayComponent,
-    AngularDateTimePickerComponent,
-    AngularDateTimePickerDirective,
     TooltipComponent,
     TooltipDirective,
   ],
